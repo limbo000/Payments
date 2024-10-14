@@ -38,20 +38,20 @@ namespace Lab11
                 // Вычисляем сумму кредита
                 double loanAmount = purchasePrice - initialPayment;
 
-                // Преобразуем годовую процентную ставку в месячную
-                double monthlyInterestRate = annualInterestRate / 100 / 12;
+                // Преобразуем годовую процентную ставку в квартальную
+                double quarterlyInterestRate = annualInterestRate / 100 / 4;
 
-                // Вычисляем количество месяцев
-                int numberOfMonths = years * 12;
+                // Вычисляем количество кварталов
+                int numberOfQuarters = years * 4;
 
-                // Вычисляем ежемесячный платеж по формуле аннуитета
-                double monthlyPayment = loanAmount * (monthlyInterestRate * Math.Pow(1 + monthlyInterestRate, numberOfMonths)) /
-                                        (Math.Pow(1 + monthlyInterestRate, numberOfMonths) - 1);
+                // Вычисляем ежеквартальный платеж по формуле аннуитета
+                double quarterlyPayment = loanAmount * (quarterlyInterestRate * Math.Pow(1 + quarterlyInterestRate, numberOfQuarters)) /
+                                          (Math.Pow(1 + quarterlyInterestRate, numberOfQuarters) - 1);
 
                 // Отображаем результат в textBox5
-                textBox5.Text = monthlyPayment.ToString("F2");
+                textBox5.Text = quarterlyPayment.ToString("F2");
 
-                MessageBox.Show("Ежемесячный платеж успешно рассчитан.", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Ежеквартальный платеж успешно рассчитан.", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -83,32 +83,32 @@ namespace Lab11
                 // Вычисляем сумму кредита
                 double loanAmount = purchasePrice - initialPayment;
 
-                // Преобразуем годовую процентную ставку в месячную
-                double monthlyInterestRate = annualInterestRate / 100 / 12;
+                // Преобразуем годовую процентную ставку в квартальную
+                double quarterlyInterestRate = annualInterestRate / 100 / 4;
 
-                // Вычисляем количество месяцев
-                int numberOfMonths = years * 12;
+                // Вычисляем количество кварталов
+                int numberOfQuarters = years * 4;
 
-                // Вычисляем ежемесячный платеж
-                double monthlyPayment = loanAmount * (monthlyInterestRate * Math.Pow(1 + monthlyInterestRate, numberOfMonths)) /
-                                        (Math.Pow(1 + monthlyInterestRate, numberOfMonths) - 1);
+                // Вычисляем ежеквартальный платеж
+                double quarterlyPayment = loanAmount * (quarterlyInterestRate * Math.Pow(1 + quarterlyInterestRate, numberOfQuarters)) /
+                                          (Math.Pow(1 + quarterlyInterestRate, numberOfQuarters) - 1);
 
                 // Переменная для оставшегося долга
                 double remainingBalance = loanAmount;
 
-                for (int month = 1; month <= numberOfMonths; month++)
+                for (int quarter = 1; quarter <= numberOfQuarters; quarter++)
                 {
                     // Вычисляем платеж по процентам
-                    double interestPayment = remainingBalance * monthlyInterestRate;
+                    double interestPayment = remainingBalance * quarterlyInterestRate;
 
                     // Вычисляем основной платеж
-                    double principalPayment = monthlyPayment - interestPayment;
+                    double principalPayment = quarterlyPayment - interestPayment;
 
                     // Уменьшаем оставшийся долг
                     remainingBalance -= principalPayment;
 
                     // Добавляем строку в DataGridView
-                    dataGridView1.Rows.Add(month, principalPayment.ToString("F2"), interestPayment.ToString("F2"), monthlyPayment.ToString("F2"));
+                    dataGridView1.Rows.Add(quarter, principalPayment.ToString("F2"), interestPayment.ToString("F2"), quarterlyPayment.ToString("F2"));
                 }
 
                 MessageBox.Show("Схема платежей успешно построена.", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
